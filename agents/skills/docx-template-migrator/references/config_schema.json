@@ -1,0 +1,122 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "DocxTemplateMigratorConfig",
+  "type": "object",
+  "required": ["name", "legacy_section_headings", "themes", "layout"],
+  "properties": {
+    "name": { "type": "string" },
+    "description_prefix": { "type": "string" },
+    "legacy_section_headings": {
+      "type": "object",
+      "description": "Map of headings in the legacy document to canonical section keys. Use null to skip the heading. Reserved keys: description, impact, risk, permissions, resources, steps, exception.",
+      "additionalProperties": { "type": ["string", "null"] }
+    },
+    "default_exception_bullets": { "type": "array", "items": { "type": "string" } },
+    "default_exception_text": { "type": "string" },
+    "themes": {
+      "type": "object",
+      "additionalProperties": {
+        "type": "object",
+        "properties": {
+          "domain": { "type": "string" },
+          "platforms": { "type": "string" },
+          "mitre": { "type": "string" },
+          "owasp": { "type": "string" },
+          "regulatory": { "type": "string" },
+          "official_refs": { "type": "array", "items": { "type": "string" } },
+          "research_refs": { "type": "array", "items": { "type": "string" } },
+          "rationale": { "type": "string" },
+          "capabilities": { "type": "array", "items": { "type": "string" } }
+        }
+      }
+    },
+    "theme_keywords": {
+      "type": "array",
+      "description": "Ordered rules; first match wins.",
+      "items": {
+        "type": "object",
+        "required": ["theme", "keywords"],
+        "properties": {
+          "theme": { "type": "string" },
+          "keywords": { "type": "array", "items": { "type": "string" } },
+          "match": { "enum": ["any", "all"] }
+        }
+      }
+    },
+    "default_theme": { "type": "string" },
+    "control_type_rules": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["label", "keywords"],
+        "properties": {
+          "label": { "type": "string" },
+          "keywords": { "type": "array", "items": { "type": "string" } }
+        }
+      }
+    },
+    "default_control_type": { "type": "string" },
+    "metadata_static": {
+      "type": "object",
+      "description": "Static metadata fields keyed by metadata_rows key (version, status, last_updated, owner, etc.).",
+      "additionalProperties": { "type": "string" }
+    },
+    "title_table_text": {
+      "type": "string",
+      "description": "Format string with {title} and {domain} placeholders for the title cell."
+    },
+    "output_name_template": {
+      "type": "string",
+      "description": "Format string with {stem}, {control_id}, {short_title} placeholders."
+    },
+    "layout": {
+      "type": "object",
+      "description": "Zero-based paragraph and table indices in the destination template.",
+      "properties": {
+        "title_paragraphs": { "type": "array", "items": { "type": "integer" } },
+        "description_paragraph": { "type": "integer" },
+        "capabilities_intro_paragraph": { "type": "integer" },
+        "capabilities_paragraphs": { "type": "array", "items": { "type": "integer" } },
+        "rationale_paragraph": { "type": "integer" },
+        "impact_paragraphs": { "type": "array", "items": { "type": "integer" } },
+        "risk_paragraphs": { "type": "array", "items": { "type": "integer" } },
+        "permissions_heading_paragraph": { "type": ["integer", "null"] },
+        "permissions_heading_text": { "type": "string" },
+        "resources_heading_paragraph": { "type": ["integer", "null"] },
+        "resources_heading_text": { "type": "string" },
+        "resources_intro_paragraph": { "type": ["integer", "null"] },
+        "resources_intro_text": { "type": "string" },
+        "env_prereq_heading_paragraph": { "type": ["integer", "null"] },
+        "env_prereq_heading_text": { "type": "string" },
+        "env_prereq_paragraphs": { "type": "array", "items": { "type": "integer" } },
+        "env_prereq_resource_slice": { "type": "array", "items": { "type": "integer" }, "minItems": 2, "maxItems": 2 },
+        "config_heading_paragraph": { "type": "integer" },
+        "config_heading_text": { "type": "string" },
+        "config_slot_range": { "type": "array", "items": { "type": "integer" }, "minItems": 2, "maxItems": 2 },
+        "list_donor_paragraph": { "type": "integer" },
+        "exception_intro_paragraph": { "type": ["integer", "null"] },
+        "exception_blank_paragraph": { "type": ["integer", "null"] },
+        "exception_bullet_paragraphs": { "type": "array", "items": { "type": "integer" } },
+        "official_refs_heading_paragraph": { "type": ["integer", "null"] },
+        "official_refs_heading_text": { "type": "string" },
+        "official_refs_range": { "type": "array", "items": { "type": "integer" }, "minItems": 2, "maxItems": 2 },
+        "research_refs_heading_paragraph": { "type": ["integer", "null"] },
+        "research_refs_heading_text": { "type": "string" },
+        "research_refs_range": { "type": "array", "items": { "type": "integer" }, "minItems": 2, "maxItems": 2 },
+        "footer_paragraph": { "type": ["integer", "null"] },
+        "footer_text": { "type": "string" },
+        "metadata_table_index": { "type": ["integer", "null"] },
+        "metadata_rows": {
+          "type": "object",
+          "description": "Map of metadata field key (control_id, short_title, control_type, domain, platforms, mitre, owasp, regulatory, plus any metadata_static keys) to row index in the metadata table.",
+          "additionalProperties": { "type": "integer" }
+        },
+        "title_table_index": { "type": ["integer", "null"] },
+        "key_risk_table_index": { "type": ["integer", "null"] },
+        "permissions_table_index": { "type": ["integer", "null"] },
+        "resources_table_index": { "type": ["integer", "null"] },
+        "removable_table_indices": { "type": "array", "items": { "type": "integer" } }
+      }
+    }
+  }
+}

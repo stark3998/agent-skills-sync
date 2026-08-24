@@ -1,0 +1,22 @@
+# Runtime and editor noise
+.DS_Store
+Thumbs.db
+*.tmp
+*.log
+
+# Never store private runtime state or credentials here
+.credentials.json
+credentials.json
+*.token
+*.secret
+*.key
+.env
+.env.*
+*.pem
+*.pfx
+*.p12
+
+# Keep generated archives out of the repo
+*.zip
+*.tar
+*.tar.gz

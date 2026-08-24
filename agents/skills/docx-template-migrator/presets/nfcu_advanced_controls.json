@@ -1,0 +1,282 @@
+{
+  "name": "nfcu_advanced_controls",
+  "description_prefix": "Description:",
+  "legacy_section_headings": {
+    "Impact of Implementation:": "impact",
+    "Risk of Non-Implementation:": "risk",
+    "Pre-requisites:": null,
+    "Permissions:": "permissions",
+    "Resources / Environmental Configuration:": "resources",
+    "Configuration Steps": "steps",
+    "Exception Management:": "exception"
+  },
+  "default_exception_text": "Any resource requiring an exception to this control must follow Navy Federal Credit Union's Document 2626.1, Security Issues and Exceptions Management Security Standard.",
+  "default_exception_bullets": [
+    "Scope: Specific resource(s) and environment(s) covered by the exception.",
+    "Business Justification: Documented technical or operational reason the control cannot be applied.",
+    "Compensating Controls: Alternative detective, preventive, or governance controls that reduce the same risk.",
+    "Approvals: Sign-off from Security Architecture, the AI Risk Champion, and the accountable business owner.",
+    "Expiration: A defined end date for the exception, with renewal or closure required before expiry.",
+    "Monitoring: Ongoing review of the excepted resource and documented acknowledgement of any related alerts or findings."
+  ],
+  "metadata_static": {
+    "version": "1.1",
+    "status": "DRAFT \u2014 Migrated from legacy advanced control",
+    "last_updated": "May 2026",
+    "owner": "[Security Architecture Team]"
+  },
+  "title_table_text": "ADVANCED CONTROL DOCUMENT | {title} | {domain}",
+  "output_name_template": "{stem}.docx",
+  "default_theme": "copilot-governance",
+  "default_control_type": "Advanced Control",
+  "control_type_rules": [
+    {
+      "label": "Advanced Detective Control",
+      "keywords": ["monitor", "detect", "alert", "logging", "audit", "inventory"]
+    },
+    {
+      "label": "Advanced Preventive Control",
+      "keywords": ["disable", "restrict", "block", "enforce", "prevent"]
+    }
+  ],
+  "theme_keywords": [
+    { "theme": "foundry-guardrails", "keywords": ["guardrail", "foundry"], "match": "any" },
+    { "theme": "purview-dlp", "keywords": ["data leakage", "m365 copilot", "dlp"], "match": "any" },
+    { "theme": "copilot-audit", "keywords": ["audit", "copilot studio"], "match": "all" },
+    { "theme": "dataverse-audit", "keywords": ["dataverse"], "match": "any" },
+    { "theme": "copilot-governance", "keywords": ["publishing", "cross-geography", "credentials", "authentication"], "match": "any" },
+    { "theme": "ai-inventory", "keywords": ["inventory", "defender"], "match": "any" },
+    { "theme": "ai-threat", "keywords": ["threat", "alerting", "application insights", "sentinel"], "match": "any" }
+  ],
+  "themes": {
+    "foundry-guardrails": {
+      "domain": "AI Runtime Security / AI Governance",
+      "platforms": "Microsoft Foundry, Azure Policy, Microsoft Sentinel",
+      "mitre": "ML Model Evasion, Prompt Injection, Inhibit Response Function",
+      "owasp": "LLM01: Prompt Injection, LLM07: Insecure Plugin Design",
+      "regulatory": "EU AI Act Article 9, NIST AI RMF GOVERN 1.2, ISO/IEC 42001",
+      "rationale": "This is an advanced control because it governs model and agent safety settings at the platform layer and combines preventive policy enforcement with detective monitoring and compliance visibility.",
+      "capabilities": [
+        "Mandates guardrail controls and policy compliance checks for model or agent deployments.",
+        "Collects compliance or activity signals into centralized monitoring workflows.",
+        "Provides an auditable path to detect exceptions, drift, or bypass attempts."
+      ],
+      "official_refs": [
+        "Manage compliance and security in Microsoft Foundry \u2014 https://learn.microsoft.com/azure/foundry/control-plane/how-to-manage-compliance-security",
+        "Quickstart: Create a guardrail policy \u2014 https://learn.microsoft.com/azure/foundry/control-plane/quickstart-create-guardrail-policy",
+        "Guardrails and controls overview in Microsoft Foundry \u2014 https://learn.microsoft.com/azure/foundry/guardrails/guardrails-overview",
+        "How to configure guardrails and controls in Microsoft Foundry \u2014 https://learn.microsoft.com/azure/foundry/guardrails/how-to-create-guardrails",
+        "Threat detection in Microsoft Sentinel \u2014 https://learn.microsoft.com/azure/sentinel/threat-detection"
+      ],
+      "research_refs": [
+        "MITRE ATLAS \u2014 https://atlas.mitre.org/",
+        "OWASP Top 10 for LLM Applications \u2014 https://genai.owasp.org/llm-top-10/",
+        "NIST AI Risk Management Framework \u2014 https://www.nist.gov/itl/ai-risk-management-framework"
+      ]
+    },
+    "purview-dlp": {
+      "domain": "AI Data Protection / Monitoring",
+      "platforms": "Microsoft Purview, Microsoft Sentinel, Microsoft 365 Copilot",
+      "mitre": "Collection, Exfiltration, Sensitive Data Exposure",
+      "owasp": "LLM02: Sensitive Information Disclosure, LLM06: Excessive Agency",
+      "regulatory": "GLBA, PCI DSS, NIST AI RMF MAP/MEASURE, ISO/IEC 42001",
+      "rationale": "This is an advanced control because it combines data protection policy, audit telemetry, and downstream security operations monitoring across multiple Microsoft security services.",
+      "capabilities": [
+        "Monitors sensitive data handling in Copilot interactions through Microsoft Purview.",
+        "Routes relevant audit and protection signals into Microsoft Sentinel for investigation.",
+        "Supports tuning, escalation, and evidentiary review for potential data leakage events."
+      ],
+      "official_refs": [
+        "Integrate Microsoft Sentinel and Microsoft Purview \u2014 https://learn.microsoft.com/azure/sentinel/purview-solution",
+        "Start ingesting Microsoft Purview data in Microsoft Sentinel \u2014 https://learn.microsoft.com/azure/sentinel/purview-solution#start-ingesting-microsoft-purview-data-in-microsoft-sentinel",
+        "Microsoft Purview service description for Microsoft 365 Copilot DLP \u2014 https://learn.microsoft.com/office365/servicedescriptions/microsoft-365-service-descriptions/microsoft-365-tenantlevel-services-licensing-guidance/microsoft-purview-service-description#microsoft-purview-data-loss-prevention-dlp-for-microsoft-365-copilot",
+        "Configure a secure and governed foundation for Microsoft 365 Copilot \u2014 https://learn.microsoft.com/microsoft-365/copilot/configure-secure-governed-data-foundation-microsoft-365-copilot#step-2-set-up-guardrails",
+        "How data is protected and audited in Microsoft 365 and Microsoft 365 Copilot \u2014 https://learn.microsoft.com/microsoft-365/copilot/microsoft-365-copilot-architecture-data-protection-auditing"
+      ],
+      "research_refs": [
+        "MITRE ATLAS \u2014 https://atlas.mitre.org/",
+        "OWASP Top 10 for LLM Applications \u2014 https://genai.owasp.org/llm-top-10/",
+        "NIST AI Risk Management Framework \u2014 https://www.nist.gov/itl/ai-risk-management-framework"
+      ]
+    },
+    "copilot-audit": {
+      "domain": "AI Governance / Auditability",
+      "platforms": "Microsoft Purview, Copilot Studio, Microsoft 365",
+      "mitre": "Audit Trail Collection, Privileged Activity Monitoring",
+      "owasp": "LLM08: Excessive Functionality, LLM10: Model Theft / Governance Gaps",
+      "regulatory": "NIST AI RMF GOVERN, SOC 2 CC7, ISO/IEC 42001",
+      "rationale": "This is an advanced control because it extends beyond baseline logging and builds centralized evidence for administrative, maker, and user activity across AI-enabled workflows.",
+      "capabilities": [
+        "Captures administrative, maker, and user AI activity in Microsoft Purview.",
+        "Provides searchable evidence for incident response, compliance review, and forensics.",
+        "Improves visibility into agent changes and user interactions that affect AI risk posture."
+      ],
+      "official_refs": [
+        "Audit Copilot Studio activities in Microsoft Purview \u2014 https://learn.microsoft.com/microsoft-copilot-studio/admin-logging-copilot-studio",
+        "Access the logs for Copilot Studio activities \u2014 https://learn.microsoft.com/microsoft-copilot-studio/admin-logging-copilot-studio#access-the-logs",
+        "Audit logs for Copilot and AI applications \u2014 https://learn.microsoft.com/purview/audit-copilot",
+        "Use Microsoft Purview to manage data security and compliance for Microsoft Copilot Studio \u2014 https://learn.microsoft.com/purview/ai-copilot-studio",
+        "Audit log activities for Microsoft 365 Copilot admin activities \u2014 https://learn.microsoft.com/purview/audit-log-activities#microsoft-365-copilot-admin-activities"
+      ],
+      "research_refs": [
+        "MITRE ATLAS \u2014 https://atlas.mitre.org/",
+        "NIST AI Risk Management Framework \u2014 https://www.nist.gov/itl/ai-risk-management-framework",
+        "Microsoft Cloud Security Benchmark AI Security \u2014 https://learn.microsoft.com/security/benchmark/azure/mcsb-v2-artificial-intelligence-security"
+      ]
+    },
+    "dataverse-audit": {
+      "domain": "Power Platform Security Monitoring / Auditability",
+      "platforms": "Microsoft Dataverse, Microsoft Purview, Microsoft Sentinel",
+      "mitre": "Collection, Audit Trail Monitoring, Data Access Monitoring",
+      "owasp": "LLM02: Sensitive Information Disclosure, LLM06: Excessive Agency",
+      "regulatory": "DPIA support requirements, NIST AI RMF GOVERN, ISO/IEC 42001",
+      "rationale": "This is an advanced control because it links application-layer auditing, platform-level configuration, and SOC-facing monitoring for Power Platform workloads.",
+      "capabilities": [
+        "Turns on environment-level and table-level auditing for Dataverse-backed workloads.",
+        "Makes activity visible in Microsoft Purview and, where applicable, Microsoft Sentinel.",
+        "Creates a consistent investigation trail for data changes, exports, and user actions."
+      ],
+      "official_refs": [
+        "Manage Dataverse auditing \u2014 https://learn.microsoft.com/power-platform/admin/manage-dataverse-auditing",
+        "Use auditing in Microsoft Dataverse and Microsoft Purview \u2014 https://learn.microsoft.com/power-automate/guidance/coding-guidelines/use-auditing-dataverse",
+        "View Microsoft Dataverse and model-driven app activity logs in Microsoft Purview \u2014 https://learn.microsoft.com/power-platform/admin/activity-logging-auditing/activity-logs-dataverse-model-driven-apps",
+        "Connect Microsoft Power Platform and Microsoft Dynamics 365 Customer Engagement to Microsoft Sentinel \u2014 https://learn.microsoft.com/azure/sentinel/business-applications/deploy-power-platform-solution",
+        "Find your Microsoft Sentinel data connector \u2014 https://learn.microsoft.com/azure/sentinel/data-connectors-reference#sentinel-data-connectors"
+      ],
+      "research_refs": [
+        "MITRE ATLAS \u2014 https://atlas.mitre.org/",
+        "OWASP Top 10 for LLM Applications \u2014 https://genai.owasp.org/llm-top-10/",
+        "NIST AI Risk Management Framework \u2014 https://www.nist.gov/itl/ai-risk-management-framework"
+      ]
+    },
+    "copilot-governance": {
+      "domain": "AI Governance / Copilot Studio Security",
+      "platforms": "Copilot Studio, Power Platform admin center, Microsoft Entra ID",
+      "mitre": "Privilege Misuse, Policy Evasion, Unauthorized Agent Operation",
+      "owasp": "LLM06: Excessive Agency, LLM07: Insecure Plugin Design",
+      "regulatory": "NIST AI RMF GOVERN, Zero Trust guidance, ISO/IEC 42001",
+      "rationale": "This is an advanced control because it constrains risky maker capabilities at the tenant and environment layers, where governance decisions directly shape downstream agent behavior.",
+      "capabilities": [
+        "Restricts high-risk Copilot Studio or Power Platform capabilities at the environment or tenant layer.",
+        "Reduces the chance of unsafe publishing, data movement, or credential handling patterns.",
+        "Supports centralized governance decisions with enforceable platform settings."
+      ],
+      "official_refs": [
+        "Key concepts - Copilot Studio security and governance \u2014 https://learn.microsoft.com/microsoft-copilot-studio/security-and-governance",
+        "Secure your Copilot Studio projects \u2014 https://learn.microsoft.com/microsoft-copilot-studio/guidance/sec-gov-phase3",
+        "Configure data movement across geographic locations for generative AI \u2014 https://learn.microsoft.com/microsoft-copilot-studio/manage-data-movement-outside-us",
+        "Control maker-provided credentials for authentication \u2014 https://learn.microsoft.com/microsoft-copilot-studio/configure-no-maker-authentication#prevent-the-use-of-maker-provided-credentials",
+        "Configure user authentication in Copilot Studio \u2014 https://learn.microsoft.com/microsoft-copilot-studio/configuration-end-user-authentication"
+      ],
+      "research_refs": [
+        "MITRE ATLAS \u2014 https://atlas.mitre.org/",
+        "OWASP Top 10 for LLM Applications \u2014 https://genai.owasp.org/llm-top-10/",
+        "NIST AI Risk Management Framework \u2014 https://www.nist.gov/itl/ai-risk-management-framework"
+      ]
+    },
+    "ai-inventory": {
+      "domain": "AI Governance / Asset Inventory",
+      "platforms": "Microsoft Defender, Microsoft Foundry, Copilot Studio, Microsoft Purview",
+      "mitre": "Asset Discovery, Exposure Management, Privileged Visibility",
+      "owasp": "LLM06: Excessive Agency, LLM10: Model Theft / Governance Gaps",
+      "regulatory": "EU AI Act transparency and governance expectations, NIST AI RMF GOVERN, ISO/IEC 42001",
+      "rationale": "This is an advanced control because it creates cross-platform AI asset visibility needed for governance, threat hunting, posture management, and operational accountability.",
+      "capabilities": [
+        "Discovers AI agents and related assets across supported Microsoft security platforms.",
+        "Improves governance by exposing ownership, posture, and inventory metadata.",
+        "Supports targeted review, reporting, and investigation of AI assets in scope."
+      ],
+      "official_refs": [
+        "Discover AI agents and assess security posture using Microsoft Defender \u2014 https://learn.microsoft.com/defender-xdr/security-for-ai/ai-agent-inventory",
+        "Protect AI assets from emerging threats and vulnerabilities using Microsoft Defender \u2014 https://learn.microsoft.com/defender-xdr/security-for-ai/defender-security-for-ai",
+        "Overview - AI security posture management \u2014 https://learn.microsoft.com/azure/defender-for-cloud/ai-security-posture",
+        "Assess your organization's AI risk with Microsoft Security Dashboard for AI \u2014 https://learn.microsoft.com/security/security-for-ai/security-dashboard-for-ai",
+        "Discover and protect AI agents with Microsoft Defender \u2014 https://learn.microsoft.com/defender-cloud-apps/ai-agent-inventory"
+      ],
+      "research_refs": [
+        "MITRE ATLAS \u2014 https://atlas.mitre.org/",
+        "NIST AI Risk Management Framework \u2014 https://www.nist.gov/itl/ai-risk-management-framework",
+        "Microsoft Cloud Security Benchmark AI Security \u2014 https://learn.microsoft.com/security/benchmark/azure/mcsb-v2-artificial-intelligence-security"
+      ]
+    },
+    "ai-threat": {
+      "domain": "AI Threat Detection / Incident Response",
+      "platforms": "Microsoft Defender, Microsoft Sentinel, Azure Monitor, Application Insights",
+      "mitre": "Reconnaissance, Execution, Collection, Impact",
+      "owasp": "LLM01: Prompt Injection, LLM02: Sensitive Information Disclosure, LLM06: Excessive Agency",
+      "regulatory": "NIST AI RMF MEASURE/MANAGE, ISO/IEC 42001, SOC monitoring requirements",
+      "rationale": "This is an advanced control because it requires continuous telemetry, analytics, and incident-response workflows rather than a single static configuration setting.",
+      "capabilities": [
+        "Collects runtime and security telemetry for AI resources and agents.",
+        "Uses Microsoft security analytics to detect suspicious AI behavior or anomalous activity.",
+        "Supports alert routing, incident response, and continuous tuning of detection logic."
+      ],
+      "official_refs": [
+        "Detect, block, and investigate threats to AI agents using Microsoft Defender \u2014 https://learn.microsoft.com/defender-xdr/security-for-ai/ai-agent-detection-protection",
+        "Alerts for AI services \u2014 https://learn.microsoft.com/azure/defender-for-cloud/alerts-ai-workloads",
+        "Threat detection in Microsoft Sentinel \u2014 https://learn.microsoft.com/azure/sentinel/threat-detection",
+        "Monitor Azure OpenAI \u2014 https://learn.microsoft.com/azure/ai-foundry/openai/how-to/monitor-openai",
+        "Architecture strategies for monitoring and threat detection \u2014 https://learn.microsoft.com/azure/well-architected/security/monitor-threats"
+      ],
+      "research_refs": [
+        "MITRE ATLAS \u2014 https://atlas.mitre.org/",
+        "OWASP Top 10 for LLM Applications \u2014 https://genai.owasp.org/llm-top-10/",
+        "NIST AI Risk Management Framework \u2014 https://www.nist.gov/itl/ai-risk-management-framework"
+      ]
+    }
+  },
+  "layout": {
+    "title_paragraphs": [0, 1, 2],
+    "description_paragraph": 4,
+    "capabilities_intro_paragraph": 6,
+    "capabilities_paragraphs": [7, 8, 9],
+    "rationale_paragraph": 12,
+    "impact_paragraphs": [17, 18, 19, 20, 21],
+    "risk_paragraphs": [24, 25, 26, 27],
+    "permissions_heading_paragraph": 30,
+    "permissions_heading_text": "3.1  Required Permissions",
+    "resources_heading_paragraph": 32,
+    "resources_heading_text": "3.2  Required Resources / Configuration",
+    "resources_intro_paragraph": 33,
+    "resources_intro_text": "The following permissions and environmental prerequisites are required before implementing this control.",
+    "env_prereq_heading_paragraph": 37,
+    "env_prereq_heading_text": "3.3  Environmental Pre-Requisites",
+    "env_prereq_paragraphs": [38, 39, 40, 41, 42],
+    "env_prereq_resource_slice": [4, 9],
+    "config_heading_paragraph": 45,
+    "config_heading_text": "4.1  Configuration Steps",
+    "config_slot_range": [46, 170],
+    "list_donor_paragraph": 48,
+    "exception_intro_paragraph": 170,
+    "exception_blank_paragraph": 171,
+    "exception_bullet_paragraphs": [172, 173, 174, 175, 176, 177],
+    "official_refs_heading_paragraph": 181,
+    "official_refs_heading_text": "Microsoft Official Documentation",
+    "official_refs_range": [182, 192],
+    "research_refs_heading_paragraph": 193,
+    "research_refs_heading_text": "Security Research and Threat Intelligence",
+    "research_refs_range": [194, 199],
+    "footer_paragraph": 202,
+    "footer_text": "Next scheduled review: November 2026 or upon material Microsoft platform change, whichever occurs first.",
+    "metadata_table_index": 1,
+    "metadata_rows": {
+      "control_id": 0,
+      "short_title": 1,
+      "control_type": 2,
+      "domain": 3,
+      "platforms": 4,
+      "mitre": 5,
+      "owasp": 6,
+      "regulatory": 7,
+      "version": 8,
+      "status": 9,
+      "last_updated": 10,
+      "owner": 11
+    },
+    "title_table_index": 0,
+    "key_risk_table_index": 3,
+    "permissions_table_index": 6,
+    "resources_table_index": 7,
+    "removable_table_indices": [10, 11, 12, 13, 14, 15, 17]
+  }
+}
