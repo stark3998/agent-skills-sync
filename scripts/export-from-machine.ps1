@@ -12,7 +12,18 @@ $mappings = @(
     @{ Source = Join-Path $HOME '.claude\skills'; Destination = Join-Path $repoRoot 'claude\skills' },
     @{ Source = Join-Path $HOME '.agents\skills'; Destination = Join-Path $repoRoot 'agents\skills' },
     @{ Source = Join-Path $HOME '.agents\hooks'; Destination = Join-Path $repoRoot 'agents\hooks' },
+    @{ Source = Join-Path $HOME '.copilot\agents'; Destination = Join-Path $repoRoot 'copilot\agents' },
+    @{ Source = Join-Path $HOME '.copilot\instructions'; Destination = Join-Path $repoRoot 'copilot\instructions' },
+    @{ Source = Join-Path $HOME '.copilot\skills'; Destination = Join-Path $repoRoot 'copilot\skills' },
+    @{ Source = Join-Path $HOME '.copilot\hooks'; Destination = Join-Path $repoRoot 'copilot\hooks' },
+    @{ Source = Join-Path $HOME '.github\hooks'; Destination = Join-Path $repoRoot 'github\hooks' },
     @{ Source = Join-Path $env:APPDATA 'Code\User\prompts'; Destination = Join-Path $repoRoot 'vscode-user\prompts' }
+)
+
+$fileMappings = @(
+    @{ Source = Join-Path $HOME '.copilot\copilot-instructions.md'; Destination = Join-Path $repoRoot 'copilot\copilot-instructions.md' },
+    @{ Source = Join-Path $HOME '.copilot\mcp-config.json'; Destination = Join-Path $repoRoot 'copilot\mcp-config.json' },
+    @{ Source = Join-Path $env:APPDATA 'Code\User\mcp.json'; Destination = Join-Path $repoRoot 'vscode-user\mcp.json' }
 )
 
 $excludeDirectoryNames = @(
@@ -93,8 +104,33 @@ function Copy-MappedTree {
     }
 }
 
+function Copy-MappedFile {
+    param(
+        [Parameter(Mandatory)] [string]$Source,
+        [Parameter(Mandatory)] [string]$Destination
+    )
+
+    if (-not (Test-Path -LiteralPath $Source -PathType Leaf)) {
+        Write-Warning "Skipping missing source: $Source"
+        return
+    }
+
+    $parent = Split-Path -Parent $Destination
+    if (-not (Test-Path -LiteralPath $parent)) {
+        New-Item -ItemType Directory -Path $parent | Out-Null
+    }
+
+    if ($PSCmdlet.ShouldProcess($Destination, "Copy from $Source")) {
+        Copy-Item -LiteralPath $Source -Destination $Destination -Force
+    }
+}
+
 foreach ($mapping in $mappings) {
     Copy-MappedTree -Source $mapping.Source -Destination $mapping.Destination
+}
+
+foreach ($mapping in $fileMappings) {
+    Copy-MappedFile -Source $mapping.Source -Destination $mapping.Destination
 }
 
 Write-Host 'Export complete. Review with: git status --short'

@@ -1,0 +1,32 @@
+{
+    "hooks": {
+        "SessionStart": [
+            {
+                "type": "command",
+                "command": "bash --noprofile --norc -c 'chmod +x \"$HOME/.github/hooks/azureSkills/scripts/track-telemetry.sh\" && \"$HOME/.github/hooks/azureSkills/scripts/track-telemetry.sh\"'",
+                "windows": "powershell -NoProfile -NonInteractive -ExecutionPolicy Bypass -Command \"& { & (Join-Path $env:USERPROFILE '.github\\hooks\\azureSkills\\scripts\\track-telemetry.ps1') }\"",
+                "linux": "bash --noprofile --norc -c 'chmod +x \"$HOME/.github/hooks/azureSkills/scripts/track-telemetry.sh\" && \"$HOME/.github/hooks/azureSkills/scripts/track-telemetry.sh\"'",
+                "osx": "bash --noprofile --norc -c 'chmod +x \"$HOME/.github/hooks/azureSkills/scripts/track-telemetry.sh\" && \"$HOME/.github/hooks/azureSkills/scripts/track-telemetry.sh\"'",
+                "powershell": "& \"$HOME/.github/hooks/azureSkills/scripts/track-telemetry.ps1\"",
+                "bash": "bash --noprofile --norc -c 'chmod +x \"$HOME/.github/hooks/azureSkills/scripts/track-telemetry.sh\" && \"$HOME/.github/hooks/azureSkills/scripts/track-telemetry.sh\"'",
+                "env": {
+                    "AZURE_SKILLS_HOOK_CLIENT_FAMILY": "copilot-vscode"
+                }
+            }
+        ],
+        "PostToolUse": [
+            {
+                "type": "command",
+                "command": "bash --noprofile --norc -c 'chmod +x \"$HOME/.github/hooks/azureSkills/scripts/track-telemetry.sh\" && \"$HOME/.github/hooks/azureSkills/scripts/track-telemetry.sh\"'",
+                "windows": "powershell -NoProfile -NonInteractive -ExecutionPolicy Bypass -Command \"& { & (Join-Path $env:USERPROFILE '.github\\hooks\\azureSkills\\scripts\\track-telemetry.ps1') }\"",
+                "linux": "bash --noprofile --norc -c 'chmod +x \"$HOME/.github/hooks/azureSkills/scripts/track-telemetry.sh\" && \"$HOME/.github/hooks/azureSkills/scripts/track-telemetry.sh\"'",
+                "osx": "bash --noprofile --norc -c 'chmod +x \"$HOME/.github/hooks/azureSkills/scripts/track-telemetry.sh\" && \"$HOME/.github/hooks/azureSkills/scripts/track-telemetry.sh\"'",
+                "powershell": "& \"$HOME/.github/hooks/azureSkills/scripts/track-telemetry.ps1\"",
+                "bash": "bash --noprofile --norc -c 'chmod +x \"$HOME/.github/hooks/azureSkills/scripts/track-telemetry.sh\" && \"$HOME/.github/hooks/azureSkills/scripts/track-telemetry.sh\"'",
+                "env": {
+                    "AZURE_SKILLS_HOOK_CLIENT_FAMILY": "copilot-vscode"
+                }
+            }
+        ]
+    }
+}

@@ -1,0 +1,108 @@
+{
+	"mcpServers": {
+		"com.microsoft/azure": {
+			"type": "local",
+			"command": "dnx",
+			"args": [
+				"Azure.Mcp@3.0.0-beta.6",
+				"--yes",
+				"--",
+				"server",
+				"start"
+			],
+			"tools": [
+				"*"
+			]
+		},
+		"console-ninja": {
+			"type": "local",
+			"command": "powershell.exe",
+			"args": [
+				"node",
+				"$Env:USERPROFILE/.console-ninja/mcp/"
+			],
+			"tools": [
+				"*"
+			]
+		},
+		"draw_io_mcp": {
+			"type": "http",
+			"url": "https://mcp.draw.io/mcp",
+			"tools": [
+				"*"
+			]
+		},
+		"io.github.ChromeDevTools/chrome-devtools-mcp": {
+			"type": "local",
+			"command": "npx",
+			"args": [
+				"--registry",
+				"https://registry.npmjs.org",
+				"chrome-devtools-mcp@0.26.0"
+			],
+			"tools": [
+				"*"
+			]
+		},
+		"io.github.github/github-mcp-server": {
+			"type": "http",
+			"url": "https://api.githubcopilot.com/mcp/",
+			"tools": [
+				"*"
+			]
+		},
+		"MCP_DOCKER": {
+			"type": "local",
+			"command": "docker",
+			"args": [
+				"mcp",
+				"gateway",
+				"run",
+				"--profile",
+				"dev"
+			],
+			"tools": [
+				"*"
+			],
+			"env": {
+				"LOCALAPPDATA": "C:\\Users\\jatmadan\\AppData\\Local",
+				"ProgramData": "C:\\ProgramData",
+				"ProgramFiles": "C:\\Program Files"
+			}
+		},
+		"microsoft-docs": {
+			"type": "http",
+			"url": "https://learn.microsoft.com/api/mcp",
+			"tools": [
+				"*"
+			]
+		},
+		"microsoft/markitdown": {
+			"type": "local",
+			"command": "uvx",
+			"args": [
+				"markitdown-mcp@0.0.1a4"
+			],
+			"tools": [
+				"*"
+			]
+		},
+		"microsoft/playwright-mcp": {
+			"type": "local",
+			"command": "npx",
+			"args": [
+				"@playwright/mcp@latest"
+			],
+			"tools": [
+				"*"
+			]
+		},
+		"microsoftdocs/mcp": {
+			"type": "http",
+			"url": "https://learn.microsoft.com/api/mcp",
+			"tools": [
+				"*"
+			]
+		}
+	}
+}

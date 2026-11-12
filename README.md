@@ -10,7 +10,19 @@ This repository mirrors personal agent, skill, hook, and VS Code prompt customiz
 | `claude/skills/` | `%USERPROFILE%\.claude\skills\` |
 | `agents/skills/` | `%USERPROFILE%\.agents\skills\` |
 | `agents/hooks/` | `%USERPROFILE%\.agents\hooks\` |
-| `vscode-user/prompts/` | `%APPDATA%\Code\User\prompts\` |
+| `copilot/agents/` | `%USERPROFILE%\.copilot\agents\` (Copilot custom agents, `*.agent.md`) |
+| `copilot/instructions/` | `%USERPROFILE%\.copilot\instructions\` (`*.instructions.md`) |
+| `copilot/skills/` | `%USERPROFILE%\.copilot\skills\` |
+| `copilot/hooks/` | `%USERPROFILE%\.copilot\hooks\` |
+| `copilot/copilot-instructions.md` | `%USERPROFILE%\.copilot\copilot-instructions.md` |
+| `copilot/mcp-config.json` | `%USERPROFILE%\.copilot\mcp-config.json` (Copilot CLI/app MCP servers) |
+| `github/hooks/` | `%USERPROFILE%\.github\hooks\` |
+| `vscode-user/prompts/` | `%APPDATA%\Code\User\prompts\` (legacy Local harness, removed Feb 2027) |
+| `vscode-user/mcp.json` | `%APPDATA%\Code\User\mcp.json` (VS Code MCP servers) |
+
+Copilot (VS Code, Copilot CLI, and the Copilot app) now reads user-level customizations from `~/.copilot/`. Old `*.chatmode.md` files should be renamed to `*.agent.md` and moved to `~/.copilot/agents/`.
+
+MCP config files are synced as-is. Keep secrets out of them by using `${input:...}` variables or environment variables, never literal tokens.
 
 ## Export From This Machine
 
